@@ -1,5 +1,12 @@
-# 🛡️ Veles Proxy<img width="50" height="50" alt="1842" src="https://github.com/user-attachments/assets/edd1538c-da31-46e3-8195-c8a190dc26aa" />
+<div align="center">
 
+  <img src="https://github.com/user-attachments/assets/edd1538c-da31-46e3-8195-c8a190dc26aa" width="100" alt="Veles Proxy Logo" />
+
+  # Veles Proxy
+
+  <p><b>Интеллектуальная система централизованной маршрутизации для OpenWrt / ImmortalWrt</b></p>
+
+</div>
 
 > **An intelligent centralized routing and traffic protection platform for routers running OpenWrt / ImmortalWrt.**  
 > Seamlessly bypasses censorship and network restrictions across your entire home network: Smart TVs, streaming boxes, smartphones, and PCs work out of the box without installing VPN clients on each device.

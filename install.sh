@@ -211,7 +211,8 @@ if ! grep -q "veless_vpn_bot" /etc/banner 2>/dev/null; then
 -----------------------------------------------------
   Veles VPN & Proxy System
   Telegram: https://t.me/veless_vpn_bot
-  Сайт:     http://veles-systems.ru
+  Сайт:     https://veles-systems.ru
+  Поддержка: https://t.me/zakons
 -----------------------------------------------------
 EOF
 fi
@@ -237,4 +238,5 @@ URL="http://$LANIP/cgi-bin/luci/admin/services/homeproxy"
 printf '\033[0;36m  \033]8;;%s\033\\%s\033]8;;\033\\\033[0m\n' "$URL" "$URL"
 echo
 info "Telegram-бот: https://t.me/veless_vpn_bot"
-info "Официальный сайт: http://veles-systems.ru"
+info "Официальный сайт: https://veles-systems.ru"
+info "Поддержка: https://t.me/zakons"

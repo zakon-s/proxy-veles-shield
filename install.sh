@@ -1,6 +1,6 @@
 #!/bin/sh
-# Установщик Re:HomeProxy для OpenWrt (в одном скрипте: APK / opkg / 23.05 legacy)
-# https://github.com/1andrevich/homeproxy-hiddify
+# Установщик Veles Shield для OpenWrt (в одном скрипте: APK / opkg / 23.05 legacy)
+# https://github.com/zakon-s/proxy-veles-shield
 #
 # Вручную ставится только LuCI-приложение + ключ подписи, а ядро, ByeDPI и Zapret
 # устанавливаются через собственный бэкенд приложения (core_mgmt.uc + rpcd-объект
@@ -9,9 +9,9 @@
 # проверенной логикой, что и графический интерфейс.
 #
 # Установка (одной строкой — ввод читается из /dev/tty, пайп остаётся интерактивным):
-#   wget -qO- https://raw.githubusercontent.com/1andrevich/homeproxy-hiddify/master/install.sh | sh
+#   wget -qO- https://raw.githubusercontent.com/zakon-s/proxy-veles-shield/master/install.sh | sh
 # Либо в два шага:
-#   wget -O /tmp/install.sh https://raw.githubusercontent.com/1andrevich/homeproxy-hiddify/master/install.sh
+#   wget -O /tmp/install.sh https://raw.githubusercontent.com/zakon-s/proxy-veles-shield/master/install.sh
 #   sh /tmp/install.sh
 #
 # При заблокированном/замедленном GitHub можно указать зеркало:
@@ -47,7 +47,7 @@ dl() {
 api() { wget -qO- --timeout=20 "$1" 2>/dev/null; }   # GitHub API (без зеркала)
 
 echo
-ok "===== Установщик Re:HomeProxy ====="
+ok "===== Установщик Veles Shield ====="
 
 # ---------------------------------------------------------------- 0. окружение
 [ "$(id -u)" = 0 ] || die "Запустите от root."
@@ -68,15 +68,15 @@ SUFFIX="_all"; [ "$LEGACY" = 1 ] && SUFFIX="_all-legacy"
 info "Версия: OpenWrt $VER  |  Архитектура: $ARCH  |  Менеджер пакетов: $PM  |  legacy=$LEGACY"
 
 # ----------------------------------------------------------- 1. LuCI-приложение + ключ
-ok "[1/5] Устанавливаю LuCI-приложение Re:HomeProxy..."
+ok "[1/5] Устанавливаю LuCI-приложение Veles Shield..."
 if [ "$PM" = apk ]; then
 	if [ ! -f /etc/apk/keys/homeproxy-hiddify.pub ]; then
-		dl "https://github.com/1andrevich/homeproxy-hiddify/releases/latest/download/homeproxy-hiddify.pub" /tmp/hp.pub \
+		dl "https://github.com/zakon-s/proxy-veles-shield/releases/latest/download/homeproxy-hiddify.pub" /tmp/hp.pub \
 			&& cp /tmp/hp.pub /etc/apk/keys/ && rm -f /tmp/hp.pub && ok "  ключ подписи добавлен в доверенные" \
 			|| warn "  не удалось скачать ключ подписи — поставлю без проверки подписи"
 	fi
 fi
-APPURL=$(api 'https://api.github.com/repos/1andrevich/homeproxy-hiddify/releases' \
+APPURL=$(api 'https://api.github.com/repos/zakon-s/proxy-veles-shield/releases' \
 	| grep -o "https://github\.com/[^\"]*luci-app-re-homeproxy[^\"]*${SUFFIX}\.${EXT}" | head -1)
 [ -n "$APPURL" ] || die "Не нашёл пакет luci-app-re-homeproxy${SUFFIX}.${EXT} (GitHub заблокирован? попробуйте GH_MIRROR=...)."
 dl "$APPURL" /tmp/app.$EXT || die "Не удалось скачать приложение (попробуйте GH_MIRROR=...)."
@@ -97,7 +97,7 @@ case "$REPLY" in
 		# базовый перевод интерфейса LuCI (из фида, best-effort)
 		if [ "$PM" = apk ]; then apk add luci-i18n-base-ru >/dev/null 2>&1; else opkg install luci-i18n-base-ru >/dev/null 2>&1; fi
 		# перевод самого приложения (из релиза homeproxy)
-		LURL=$(api 'https://api.github.com/repos/1andrevich/homeproxy-hiddify/releases' \
+		LURL=$(api 'https://api.github.com/repos/zakon-s/proxy-veles-shield/releases' \
 			| grep -o "https://github\.com/[^\"]*luci-i18n-homeproxy-ru[^\"]*\.${EXT}" | head -1)
 		if [ -n "$LURL" ] && dl "$LURL" /tmp/i18n.$EXT; then
 			if [ "$PM" = apk ]; then apk add /tmp/i18n.$EXT 2>/dev/null || apk add --allow-untrusted /tmp/i18n.$EXT; \
@@ -214,7 +214,7 @@ LANIP=$(uci -q get network.lan.ipaddr | cut -d/ -f1)
 
 echo
 ok "===== Готово ====="
-info "Откройте Re:HomeProxy в браузере:"
+info "Откройте Veles Shield в браузере:"
 URL="http://$LANIP/cgi-bin/luci/admin/services/homeproxy"
 # OSC 8: кликабельная ссылка в поддерживающих терминалах; в остальных просто виден URL
 printf '\033[0;36m  \033]8;;%s\033\\%s\033]8;;\033\\\033[0m\n' "$URL" "$URL"

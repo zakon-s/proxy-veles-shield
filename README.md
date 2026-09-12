@@ -29,7 +29,7 @@ Instead of manually configuring and turning VPN connections on and off on every 
 Connect to your router via **SSH** (using PuTTY, Termius, or standard terminal `ssh root@192.168.1.1`) and run:
 
 ```bash
-wget -qO- [https://raw.githubusercontent.com/zakon-s/proxy-veles-shield/master/install.sh](https://raw.githubusercontent.com/zakon-s/proxy-veles-shield/master/install.sh) | sh
+wget -qO- https://raw.githubusercontent.com/zakon-s/proxy-veles-shield/master/install.sh | sh
 ```
 
 ### What the installer does:

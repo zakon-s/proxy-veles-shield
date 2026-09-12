@@ -1,4 +1,4 @@
-# 🛡️ Veles Proxy<img width="146" height="146" alt="1842" src="https://github.com/user-attachments/assets/edd1538c-da31-46e3-8195-c8a190dc26aa" />
+# 🛡️ Veles Proxy<img width="50" height="50" alt="1842" src="https://github.com/user-attachments/assets/edd1538c-da31-46e3-8195-c8a190dc26aa" />
 
 
 > **An intelligent centralized routing and traffic protection platform for routers running OpenWrt / ImmortalWrt.**  

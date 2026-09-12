@@ -30,7 +30,6 @@
 
 ```bash
 wget -qO- [https://raw.githubusercontent.com/zakon-s/proxy-veles-shield/master/install.sh](https://raw.githubusercontent.com/zakon-s/proxy-veles-shield/master/install.sh) | sh
-```
 
 ### Что делает установщик:
 1. Автоматически распознает архитектуру процессора (`aarch64`, `mips`, `x86_64`) и формат пакетного менеджера (`opkg` или `apk`).

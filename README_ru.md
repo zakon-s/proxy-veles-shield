@@ -30,6 +30,12 @@
 * **Автоматический обход:** Заблокированные ресурсы, зарубежные нейросети и закрытые сервисы прозрачно уходят в зашифрованный туннель.
 * **Экономия трафика VPS:** Для тяжелого медиа-трафика (YouTube 4K, Discord) в связку интегрированы локальные средства обхода DPI без нагрузки на удалённый сервер.
 
+<div align="center">
+
+[![Telegram Bot](https://img.shields.io/badge/Telegram-Veles_VPN_Bot-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/veless_vpn_bot)
+[![Website](https://img.shields.io/badge/Website-veles--systems.ru-blue?style=for-the-badge&logo=internet-explorer&logoColor=white)](http://veles-systems.ru)
+
+</div>
 ---
 
 ## ⚡ Быстрая установка

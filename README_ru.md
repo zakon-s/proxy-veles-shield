@@ -28,8 +28,7 @@
 
 Подключитесь к роутеру по **SSH** (через PuTTY, Termius или стандартную консоль `ssh root@192.168.1.1`) и выполните команду:
 
-```bash
-wget -qO- [https://raw.githubusercontent.com/zakon-s/proxy-veles-shield/master/install.sh](https://raw.githubusercontent.com/zakon-s/proxy-veles-shield/master/install.sh) | sh
+wget -qO- https://raw.githubusercontent.com/zakon-s/proxy-veles-shield/master/install.sh | sh
 
 ### Что делает установщик:
 1. Автоматически распознает архитектуру процессора (`aarch64`, `mips`, `x86_64`) и формат пакетного менеджера (`opkg` или `apk`).

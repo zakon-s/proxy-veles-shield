@@ -6,14 +6,14 @@
   <a href="https://nowpayments.io/donation?api_key=decbeb76-30f8-4c6d-ba40-2d2dec7fd888"><img src="https://img.shields.io/badge/Crypto-Donate-2EBE74?style=flat-square&logo=bitcoin&logoColor=white" alt="Crypto donate"></a>
 </p>
 
-# Re:HomeProxy
+# Veles Proxy
 
 A modern multi-core proxy platform powered by [hiddify-core](https://github.com/hiddify/hiddify-core) and [sing-box-extended](https://github.com/shtorm-7/sing-box-extended). 
 A fork of [ImmortalWrt HomeProxy](https://github.com/immortalwrt/homeproxy).
 
 ## Overview
 
-Re:HomeProxy is a feature-rich proxy management system, a fresh take on ImmortalWrt's HomeProxy. It runs on a choice of cores ([hiddify-core](https://github.com/hiddify/hiddify-core) or [sing-box-extended](https://github.com/shtorm-7/sing-box-extended)), adds a built-in DPI-bypass based on [Zapret2](https://github.com/bol-van/zapret2) and [ByeDPI](https://github.com/hufrea/byedpi) for un-throttling sites without a VPN, ready-made Russia routing rules, and a one-click core installer — all from the LuCI web interface.
+Veles Proxy is a feature-rich proxy management system, a fresh take on ImmortalWrt's HomeProxy. It runs on a choice of cores ([hiddify-core](https://github.com/hiddify/hiddify-core) or [sing-box-extended](https://github.com/shtorm-7/sing-box-extended)), adds a built-in DPI-bypass based on [Zapret2](https://github.com/bol-van/zapret2) and [ByeDPI](https://github.com/hufrea/byedpi) for un-throttling sites without a VPN, ready-made Russia routing rules, and a one-click core installer — all from the LuCI web interface.
 
 ## Key Features
 
@@ -38,7 +38,7 @@ Optionally legacy build for 23.05 is available in Releases
 
 ## Installation
 
-*~40 MB of free space recommended. Tight on storage? Install the LuCI app first, then use its **Core & Tools** tab (Services → Re:HomeProxy → Core & Tools) to install a core — it auto-picks a build that fits, including a compact build for small memory devices.*
+*~40 MB of free space recommended. Tight on storage? Install the LuCI app first, then use its **Core & Tools** tab (Services → Veles Proxy → Core & Tools) to install a core — it auto-picks a build that fits, including a compact build for small memory devices.*
 
 ### Quick install (one-liner)
 
@@ -71,7 +71,7 @@ Once the key is in `/etc/apk/keys/` it is trusted permanently — no flag needed
 
 #### 2. Install components from the **Core & Tools** tab
 
-Open **Services → Re:HomeProxy → Core & Tools** and install what you need — the installer auto-picks a build that fits your storage:
+Open **Services → Veles Proxy → Core & Tools** and install what you need — the installer auto-picks a build that fits your storage:
 
 - **Proxy core** *(required, pick one)* — [hiddify-core](https://github.com/hiddify/hiddify-core) (default) or [sing-box-extended](https://github.com/shtorm-7/sing-box-extended) (adds AmneziaWG / WARP and the widest protocol set). See **[Core Management](../../wiki/Core-Management-en)**.
 - **ByeDPI** *(optional)* — SOCKS-level DPI bypass that un-throttles sites without a VPN, with 40 presets and a built-in strategy tester. See **[ByeDPI](../../wiki/ByeDPI-en)**.
@@ -88,7 +88,7 @@ opkg install /tmp/luci-app-re-homeproxy.ipk
 
 #### 2. Install components from the **Core & Tools** tab
 
-Open **Services → Re:HomeProxy → Core & Tools** and install what you need — the installer auto-picks a build that fits your storage:
+Open **Services → Veles Proxy → Core & Tools** and install what you need — the installer auto-picks a build that fits your storage:
 
 - **Proxy core** *(required, pick one)* — [hiddify-core](https://github.com/hiddify/hiddify-core) (default) or [sing-box-extended](https://github.com/shtorm-7/sing-box-extended) (adds AmneziaWG / WARP and the widest protocol set). See **[Core Management](../../wiki/Core-Management-en)**.
 - **ByeDPI** *(optional)* — SOCKS-level DPI bypass that un-throttles sites without a VPN, with 40 presets and a built-in strategy tester. See **[ByeDPI](../../wiki/ByeDPI-en)**.
@@ -151,7 +151,7 @@ If using "Custom JSON" — see the **[Custom JSON Config](../../wiki/Custom-JSON
 /etc/init.d/homeproxy start
 ```
 
-The service will auto-start on boot. Monitor logs at **Services → Re:HomeProxy → Core & Tools**.
+The service will auto-start on boot. Monitor logs at **Services → Veles Proxy → Core & Tools**.
 
 ## Documentation
 
@@ -172,7 +172,7 @@ Full guides live in the **[Wiki](../../wiki/Home)**:
 
 ## Credits & Acknowledgements
 
-Re:HomeProxy stands on the work of many upstream projects. The LuCI app is GPL-licensed; the cores and bypass engines are fetched at install time from their own releases and remain under their own licenses.
+Veles Proxy stands on the work of many upstream projects. The LuCI app is GPL-licensed; the cores and bypass engines are fetched at install time from their own releases and remain under their own licenses.
 
 **Base & cores**
 - [ImmortalWrt HomeProxy](https://github.com/immortalwrt/homeproxy) — the original LuCI app this is a fork of

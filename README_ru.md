@@ -6,14 +6,14 @@
   <a href="https://nowpayments.io/donation?api_key=decbeb76-30f8-4c6d-ba40-2d2dec7fd888"><img src="https://img.shields.io/badge/Crypto-Donate-2EBE74?style=flat-square&logo=bitcoin&logoColor=white" alt="Crypto donate"></a>
 </p>
 
-# Re:HomeProxy
+# Veles Proxy
 
 Современная многоядерная прокси-платформа на основе [hiddify-core](https://github.com/hiddify/hiddify-core) и [sing-box-extended](https://github.com/shtorm-7/sing-box-extended).
 Форк [ImmortalWrt HomeProxy](https://github.com/immortalwrt/homeproxy).
 
 ## Обзор
 
-Re:HomeProxy — многофункциональная система управления прокси, новый взгляд на HomeProxy от ImmortalWrt. Работает на выбор ядра ([hiddify-core](https://github.com/hiddify/hiddify-core) или [sing-box-extended](https://github.com/shtorm-7/sing-box-extended)), включает встроенный обход DPI на основе [Zapret2](https://github.com/bol-van/zapret2) и [ByeDPI](https://github.com/hufrea/byedpi) для разблокировки сайтов без VPN, готовые правила маршрутизации для России и установщик ядра в один клик — всё из веб-интерфейса LuCI.
+Veles Proxy — многофункциональная система управления прокси, новый взгляд на HomeProxy от ImmortalWrt. Работает на выбор ядра ([hiddify-core](https://github.com/hiddify/hiddify-core) или [sing-box-extended](https://github.com/shtorm-7/sing-box-extended)), включает встроенный обход DPI на основе [Zapret2](https://github.com/bol-van/zapret2) и [ByeDPI](https://github.com/hufrea/byedpi) для разблокировки сайтов без VPN, готовые правила маршрутизации для России и установщик ядра в один клик — всё из веб-интерфейса LuCI.
 
 ## Ключевые возможности
 
@@ -38,7 +38,7 @@ Re:HomeProxy — многофункциональная система упра�
 
 ## Установка
 
-*Рекомендуется ~40 Мб свободного места. Мало места? Сначала установите пакет LuCI, затем на вкладке **Ядро и службы** (Службы → Re:HomeProxy → Ядро и службы) установите ядро — оно само подберёт подходящую сборку для устройств с малым объёмом памяти.*
+*Рекомендуется ~40 Мб свободного места. Мало места? Сначала установите пакет LuCI, затем на вкладке **Ядро и службы** (Службы → Veles Proxy → Ядро и службы) установите ядро — оно само подберёт подходящую сборку для устройств с малым объёмом памяти.*
 
 ### Быстрая установка (одной строкой)
 
@@ -58,7 +58,7 @@ wget -qO- https://raw.githubusercontent.com/1andrevich/homeproxy-hiddify/master/
 
 ### OpenWRT 25.12+ (APK)
 
-#### 1. Установка пакета Re:HomeProxy
+#### 1. Установка пакета Veles Proxy
 
 ```sh
 wget -O /tmp/homeproxy-hiddify.pub https://github.com/1andrevich/homeproxy-hiddify/releases/latest/download/homeproxy-hiddify.pub
@@ -71,7 +71,7 @@ apk add /tmp/luci-app-re-homeproxy.apk
 
 #### 2. Установка компонентов на вкладке **Ядро и службы**
 
-Откройте **Службы → Re:HomeProxy → Ядро и службы** и установите нужное — установщик сам подберёт сборку под свободное место:
+Откройте **Службы → Veles Proxy → Ядро и службы** и установите нужное — установщик сам подберёт сборку под свободное место:
 
 - **Ядро прокси** *(обязательно, выберите одно)* — [hiddify-core](https://github.com/hiddify/hiddify-core) (по умолчанию) или [sing-box-extended](https://github.com/shtorm-7/sing-box-extended) (добавляет AmneziaWG / WARP и самый широкий набор протоколов). См. **[Управление ядром](../../wiki/Core-Management-ru)**.
 - **ByeDPI** *(опционально)* — обход DPI на уровне SOCKS, снимает троттлинг без VPN, 47 пресетов и встроенный тестер стратегий. См. **[ByeDPI](../../wiki/ByeDPI-ru)**.
@@ -88,7 +88,7 @@ apk add /tmp/luci-i18n-homeproxy-ru.apk
 
 ### OpenWRT 24.10 (opkg)
 
-#### 1. Установка пакета Re:HomeProxy
+#### 1. Установка пакета Veles Proxy
 
 ```sh
 wget -O /tmp/luci-app-re-homeproxy.ipk "$(wget -qO- 'https://api.github.com/repos/1andrevich/homeproxy-hiddify/releases' | grep -o 'https://github\.com/[^"]*luci-app-re-homeproxy[^"]*\.ipk' | head -1)"
@@ -97,7 +97,7 @@ opkg install /tmp/luci-app-re-homeproxy.ipk
 
 #### 2. Установка компонентов на вкладке **Ядро и службы**
 
-Откройте **Службы → Re:HomeProxy → Ядро и службы** и установите нужное — установщик сам подберёт сборку под свободное место:
+Откройте **Службы → Veles Proxy → Ядро и службы** и установите нужное — установщик сам подберёт сборку под свободное место:
 
 - **Ядро прокси** *(обязательно, выберите одно)* — [hiddify-core](https://github.com/hiddify/hiddify-core) (по умолчанию) или [sing-box-extended](https://github.com/shtorm-7/sing-box-extended) (добавляет AmneziaWG / WARP и самый широкий набор протоколов). См. **[Управление ядром](../../wiki/Core-Management-ru)**.
 - **ByeDPI** *(опционально)* — обход DPI на уровне SOCKS, снимает троттлинг без VPN, 47 пресетов и встроенный тестер стратегий. См. **[ByeDPI](../../wiki/ByeDPI-ru)**.
@@ -165,7 +165,7 @@ if [ "$EXT" = apk ]; then apk add /tmp/zapret2.apk; else opkg install /tmp/zapre
 /etc/init.d/homeproxy start
 ```
 
-Служба запускается автоматически при загрузке системы. Логи доступны в разделе **Службы → Re:HomeProxy → Ядро и службы**.
+Служба запускается автоматически при загрузке системы. Логи доступны в разделе **Службы → Veles Proxy → Ядро и службы**.
 
 ## Документация
 
@@ -186,7 +186,7 @@ if [ "$EXT" = apk ]; then apk add /tmp/zapret2.apk; else opkg install /tmp/zapre
 
 ## Благодарности и используемые проекты
 
-Re:HomeProxy опирается на работу множества вышестоящих проектов. Приложение LuCI распространяется под GPL; ядра и движки обхода DPI скачиваются при установке из их собственных релизов и остаются под своими лицензиями.
+Veles Proxy опирается на работу множества вышестоящих проектов. Приложение LuCI распространяется под GPL; ядра и движки обхода DPI скачиваются при установке из их собственных релизов и остаются под своими лицензиями.
 
 **Основа и ядра**
 - [ImmortalWrt HomeProxy](https://github.com/immortalwrt/homeproxy) — исходное приложение LuCI, форком которого является проект

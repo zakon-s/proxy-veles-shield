@@ -1,5 +1,5 @@
 #!/bin/sh
-# Установщик Veles Shield для OpenWrt (в одном скрипте: APK / opkg / 23.05 legacy)
+# Установщик Veles Proxy для OpenWrt (в одном скрипте: APK / opkg / 23.05 legacy)
 # https://github.com/zakon-s/proxy-veles-shield
 #
 # Вручную ставится только LuCI-приложение + ключ подписи, а ядро, ByeDPI и Zapret
@@ -47,7 +47,7 @@ dl() {
 api() { wget -qO- --timeout=20 "$1" 2>/dev/null; }   # GitHub API (без зеркала)
 
 echo
-ok "===== Установщик Veles Shield ====="
+ok "===== Установщик Veles Proxy ====="
 
 # ---------------------------------------------------------------- 0. окружение
 [ "$(id -u)" = 0 ] || die "Запустите от root."
@@ -68,7 +68,7 @@ SUFFIX="_all"; [ "$LEGACY" = 1 ] && SUFFIX="_all-legacy"
 info "Версия: OpenWrt $VER  |  Архитектура: $ARCH  |  Менеджер пакетов: $PM  |  legacy=$LEGACY"
 
 # ----------------------------------------------------------- 1. LuCI-приложение + ключ
-ok "[1/5] Устанавливаю LuCI-приложение Veles Shield..."
+ok "[1/5] Устанавливаю LuCI-приложение Veles Proxy..."
 if [ "$PM" = apk ]; then
 	if [ ! -f /etc/apk/keys/homeproxy-hiddify.pub ]; then
 		dl "https://github.com/zakon-s/proxy-veles-shield/releases/latest/download/homeproxy-hiddify.pub" /tmp/hp.pub \
@@ -214,7 +214,7 @@ LANIP=$(uci -q get network.lan.ipaddr | cut -d/ -f1)
 
 echo
 ok "===== Готово ====="
-info "Откройте Veles Shield в браузере:"
+info "Откройте Veles Proxy в браузере:"
 URL="http://$LANIP/cgi-bin/luci/admin/services/homeproxy"
 # OSC 8: кликабельная ссылка в поддерживающих терминалах; в остальных просто виден URL
 printf '\033[0;36m  \033]8;;%s\033\\%s\033]8;;\033\\\033[0m\n' "$URL" "$URL"

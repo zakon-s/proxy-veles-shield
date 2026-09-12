@@ -912,7 +912,7 @@ return view.extend({
 		s.anonymous = true;
 
 		o = s.option(form.DummyValue, '_homeproxy_logview');
-		o.render = L.bind(getRuntimeLog, this, o, _('Re:HomeProxy'));
+		o.render = L.bind(getRuntimeLog, this, o, _('Veles Proxy'));
 
 		o = s.option(form.DummyValue, '_hiddify-c_logview');
 		o.render = L.bind(getRuntimeLog, this, o, _('core client'));

@@ -5,7 +5,7 @@
 
 include $(TOPDIR)/rules.mk
 
-LUCI_TITLE:=Re:HomeProxy - multi-core proxy platform (fork of ImmortalWrt HomeProxy)
+LUCI_TITLE:=Veles Proxy - multi-core proxy platform (fork of ImmortalWrt HomeProxy)
 LUCI_PKGARCH:=all
 LUCI_DEPENDS:= \
 	+firewall4 \

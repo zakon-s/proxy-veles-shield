@@ -3848,8 +3848,8 @@ msgid "Diagnostics Report"
 msgstr "Отчёт диагностики"
 
 #: htdocs/luci-static/resources/view/homeproxy/diagnostics.js
-msgid "Veles Shield Diagnostics"
-msgstr "Диагностика Veles Shield"
+msgid "Veles Proxy Diagnostics"
+msgstr "Диагностика Veles Proxy"
 
 #: root/usr/share/luci/menu.d/luci-app-re-homeproxy.json
 msgid "Core & Tools"

@@ -61,8 +61,8 @@ else die "Не найден поддерживаемый менеджер пак
 case "$VER" in
 	23.05*)                 LEGACY=1 ;;
 	24.10*|25.*|*SNAPSHOT*) LEGACY=0 ;;
-	22.*|21.*|19.*)      die "OpenWrt $VER слишком старая — нужна 23.05 или новее." ;;
-	*)                    LEGACY=0; warn "Непроверенная версия OpenWrt $VER — продолжаю." ;;
+	22.*|21.*|19.*)         die "OpenWrt $VER слишком старая — нужна 23.05 или новее." ;;
+	*)                      LEGACY=0; warn "Непроверенная версия OpenWrt $VER — продолжаю." ;;
 esac
 SUFFIX="_all"; [ "$LEGACY" = 1 ] && SUFFIX="_all-legacy"
 info "Версия: OpenWrt $VER  |  Архитектура: $ARCH  |  Менеджер пакетов: $PM  |  legacy=$LEGACY"
@@ -216,17 +216,11 @@ if ! grep -q "veless_vpn_bot" /etc/banner 2>/dev/null; then
 EOF
 fi
 
-# 6.2. Вшиваем кликабельные ссылки в веб-интерфейс LuCI
-TARGET_VIEW=$(find /www/luci-static/resources/view/ -type f \( -name "*homeproxy*.js" -o -name "*veles*.js" -o -name "client.js" \) 2>/dev/null | head -1)
-if [ -n "$TARGET_VIEW" ]; then
-	sed -i 's|m = new form.Map.*|				m = new form.Map(\x27homeproxy\x27, _(\x27Veles Proxy\x27),|' "$TARGET_VIEW"
-	sed -i 's|.*The modern multi-core proxy platform.*|\t\t\t\t\x27Поддержка и продление: <a href="https://t.me/veless_vpn_bot" target="_blank" style="font-weight:bold; color:#0088cc;">Telegram-бот</a> • <a href="http://veles-systems.ru" target="_blank" style="font-weight:bold; color:#2b73b7;">veles-systems.ru</a>\x27);|' "$TARGET_VIEW"
-fi
-
-# 6.3. Сброс кэша веб-интерфейса
+# 6.2. Сброс кэша интерфейса LuCI
 rm -rf /tmp/luci-indexcache /tmp/luci-modulecache/
 /etc/init.d/uhttpd restart >/dev/null 2>&1 || true
 
+# 6.3. Запуск службы
 /etc/init.d/homeproxy enable  >/dev/null 2>&1
 /etc/init.d/homeproxy start   >/dev/null 2>&1
 

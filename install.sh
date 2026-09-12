@@ -59,10 +59,10 @@ if   command -v apk  >/dev/null 2>&1; then PM=apk;  EXT=apk
 elif command -v opkg >/dev/null 2>&1; then PM=opkg; EXT=ipk
 else die "Не найден поддерживаемый менеджер пакетов (apk/opkg)."; fi
 case "$VER" in
-	23.05*)              LEGACY=1 ;;
+	23.05*)                 LEGACY=1 ;;
 	24.10*|25.*|*SNAPSHOT*) LEGACY=0 ;;
 	22.*|21.*|19.*)      die "OpenWrt $VER слишком старая — нужна 23.05 или новее." ;;
-	*)                   LEGACY=0; warn "Непроверенная версия OpenWrt $VER — продолжаю." ;;
+	*)                    LEGACY=0; warn "Непроверенная версия OpenWrt $VER — продолжаю." ;;
 esac
 SUFFIX="_all"; [ "$LEGACY" = 1 ] && SUFFIX="_all-legacy"
 info "Версия: OpenWrt $VER  |  Архитектура: $ARCH  |  Менеджер пакетов: $PM  |  legacy=$LEGACY"
@@ -204,6 +204,28 @@ case "$REPLY" in
 esac
 
 # ------------------------------------------------------------------- 6. финал
+# 6.1. Добавляем баннер в консоль SSH
+if ! grep -q "veless_vpn_bot" /etc/banner 2>/dev/null; then
+	cat << 'EOF' >> /etc/banner
+
+-----------------------------------------------------
+  Veles VPN & Proxy System
+  Telegram: https://t.me/veless_vpn_bot
+  Сайт:     http://veles-systems.ru
+-----------------------------------------------------
+EOF
+fi
+
+# 6.2. Вшиваем кликабельные ссылки в веб-интерфейс LuCI
+TARGET_VIEW=$(find /www/luci-static/resources/view/ -type f \( -name "*homeproxy*.js" -o -name "*veles*.js" -o -name "client.js" \) 2>/dev/null | head -1)
+if [ -n "$TARGET_VIEW" ] && ! grep -q "veless_vpn_bot" "$TARGET_VIEW"; then
+	sed -i 's|new form.Map(\([^,]*\), \([^,]*\))|new form.Map(\1, \2, "Поддержка и продление: <a href=\\\"https://t.me/veless_vpn_bot\\\" target=\\\"_blank\\\" style=\\\"font-weight:bold; color:#0088cc;\\\">Telegram-бот</a> | <a href=\\\"http://veles-systems.ru\\\" target=\\\"_blank\\\" style=\\\"font-weight:bold; color:#2b73b7;\\\">veles-systems.ru</a>")|g' "$TARGET_VIEW"
+fi
+
+# 6.3. Сброс кэша веб-интерфейса
+rm -rf /tmp/luci-indexcache /tmp/luci-modulecache/
+/etc/init.d/uhttpd restart >/dev/null 2>&1 || true
+
 /etc/init.d/homeproxy enable  >/dev/null 2>&1
 /etc/init.d/homeproxy start   >/dev/null 2>&1
 
@@ -218,3 +240,6 @@ info "Откройте Veles Proxy в браузере:"
 URL="http://$LANIP/cgi-bin/luci/admin/services/homeproxy"
 # OSC 8: кликабельная ссылка в поддерживающих терминалах; в остальных просто виден URL
 printf '\033[0;36m  \033]8;;%s\033\\%s\033]8;;\033\\\033[0m\n' "$URL" "$URL"
+echo
+info "Telegram-бот: https://t.me/veless_vpn_bot"
+info "Официальный сайт: http://veles-systems.ru"

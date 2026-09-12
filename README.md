@@ -1,196 +1,130 @@
-[**Русский 🇷🇺**](README_ru.md) / [**English**](README.md)
+# 🛡️ Veles Proxy
 
-<p align="center">
-  <a href="https://t.me/one_andrevich"><img src="https://img.shields.io/badge/Telegram-Join-2CA5E0?style=flat-square&logo=telegram&logoColor=white" alt="Telegram"></a>
-  <a href="https://ko-fi.com/D1D11SQNQD"><img src="https://img.shields.io/badge/Ko--fi-Support-FF5E5B?style=flat-square&logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
-  <a href="https://nowpayments.io/donation?api_key=decbeb76-30f8-4c6d-ba40-2d2dec7fd888"><img src="https://img.shields.io/badge/Crypto-Donate-2EBE74?style=flat-square&logo=bitcoin&logoColor=white" alt="Crypto donate"></a>
-</p>
+> **An intelligent centralized routing and traffic protection platform for routers running OpenWrt / ImmortalWrt.**  
+> Seamlessly bypasses censorship and network restrictions across your entire home network: Smart TVs, streaming boxes, smartphones, and PCs work out of the box without installing VPN clients on each device.
 
-# Veles Proxy
+---
 
-A modern multi-core proxy platform powered by [hiddify-core](https://github.com/hiddify/hiddify-core) and [sing-box-extended](https://github.com/shtorm-7/sing-box-extended). 
-A fork of [ImmortalWrt HomeProxy](https://github.com/immortalwrt/homeproxy).
+[![OpenWrt](https://img.shields.io/badge/OpenWrt-23.05%20%7C%2024.10%20%7C%2025.12-blue?logo=openwrt)](https://openwrt.org)
+[![ImmortalWrt](https://img.shields.io/badge/ImmortalWrt-Supported-brightgreen)](https://immortalwrt.org)
+[![Sing-box](https://img.shields.io/badge/Core-sing--box%20%2F%20hiddify-orange)](https://github.com/SagerNet/sing-box)
+[![Zapret 2](https://img.shields.io/badge/DPI-Zapret%202%20%2B%20ByeDPI-red)](#)
+[![Package Manager](https://img.shields.io/badge/pkg-opkg%20%26%20apk-lightgrey)](#)
+[![License](https://img.shields.io/badge/License-GPL--2.0-blue.svg)](LICENSE)
 
-## Overview
+---
 
-Veles Proxy is a feature-rich proxy management system, a fresh take on ImmortalWrt's HomeProxy. It runs on a choice of cores ([hiddify-core](https://github.com/hiddify/hiddify-core) or [sing-box-extended](https://github.com/shtorm-7/sing-box-extended)), adds a built-in DPI-bypass based on [Zapret2](https://github.com/bol-van/zapret2) and [ByeDPI](https://github.com/hufrea/byedpi) for un-throttling sites without a VPN, ready-made Russia routing rules, and a one-click core installer — all from the LuCI web interface.
+## 💡 Why Veles Proxy?
 
-## Key Features
+Instead of manually configuring and turning VPN connections on and off on every mobile device, laptop, or Android TV, **Veles Proxy** manages network filtering directly at the router gateway:
 
-- **Multi-core engine** — run on **hiddify-core** or **sing-box-extended**, your choice per device. The built-in **Core Management** page installs and updates the core for you and automatically picks the right build for your available storage (with a compact build for tight-storage devices).
-- **Wide protocol support** — Naive, Mieru, Hysteria, SOCKS, Shadowsocks, ShadowTLS, Trojan, VLESS (XHTTP), VMess, WireGuard, **AmneziaWG / WARP** (sing-box-extended), SSH and more.
-- **Two built-in DPI-bypass engines** — un-throttle and unblock sites (e.g. YouTube, Discord) **without any VPN subscription**:
-  - **ByeDPI** ([hufrea/byedpi](https://github.com/hufrea/byedpi)) — a SOCKS-level desync proxy, with 47 ready-made strategy presets and a multi-site **strategy tester** that shows which setting actually works on your ISP.
-  - **Zapret 2** ([bol-van/zapret2](https://github.com/bol-van/zapret2), nfqws2) — a packet-level NFQUEUE desync that mangles the handshake in-place. Selected per routing rule (e.g. send only YouTube/Discord through it), with curated presets, optional Discord-voice desync, and its own scoped tester.
-- **URLTest auto-selection** — automatically routes through the fastest reachable node and fails over when one goes down.
-- **Russia routing rules** — one-click RU Proxy Rules (Russia Inside, Re:Filter) with curated domain/IP lists, so only blocked destinations go through the proxy.
-- **Subscription support** — import nodes from subscription links (sing-box JSON / Hiddify, base64 / plain share-links, and Xray/V2Ray JSON configs) and update them on demand.
-- **Diagnostics** — a built-in page to check core/system health, inspect ports, and generate a shareable report.
-- **Modern web interface** — clean, responsive LuCI UI with node management, ACL traffic routing, and NFT rule control.
+* **Smart Split-Tunneling:** Local services, domestic banking apps, government portals, and local video platforms route directly through your ISP at full line speed.
+* **Automated Censorship Bypass:** Blocked websites, restricted services, and AI platforms are transparently directed through an encrypted tunnel.
+* **VPS Bandwidth Optimization:** High-bandwidth media streams (such as YouTube 4K and Discord voice/video) leverage integrated on-router DPI evasion techniques (Zapret 2 / ByeDPI) without overloading your remote VPS bandwidth.
 
+---
 
-## Prerequisites
+## ⚡ Quick Installation
 
-- OpenWRT / ImmortalWrt 24.10 or higher (opkg)
-- OpenWRT / ImmortalWrt 25.12 or higher (apk)
+Connect to your router via **SSH** (using PuTTY, Termius, or standard terminal `ssh root@192.168.1.1`) and run:
 
-Optionally legacy build for 23.05 is available in Releases
-
-## Installation
-
-*~40 MB of free space recommended. Tight on storage? Install the LuCI app first, then use its **Core & Tools** tab (Services → Veles Proxy → Core & Tools) to install a core — it auto-picks a build that fits, including a compact build for small memory devices.*
-
-### Quick install (one-liner)
-
-Installs the LuCI app, then interactively walks you through the proxy core and optional ByeDPI / Zapret. Works on APK (25.12+), opkg (24.10) and 23.05 legacy. Run over SSH on the router:
-
-```sh
-wget -qO- https://raw.githubusercontent.com/1andrevich/homeproxy-hiddify/master/install.sh | sh
+```bash
+wget -qO- [https://raw.githubusercontent.com/zakon-s/proxy-veles-shield/master/install.sh](https://raw.githubusercontent.com/zakon-s/proxy-veles-shield/master/install.sh) | sh
 ```
 
-Behind a blocked/throttled GitHub, pass a mirror (note: the env var goes on `sh`, not `wget`):
+### What the installer does:
+1. Automatically detects CPU architecture (`aarch64`, `mips`, `x86_64`) and package manager format (`opkg` or `apk`).
+2. Installs the **Veles Proxy** LuCI web interface with localization support.
+3. Downloads, verifies, and configures the chosen routing core.
+4. Optionally installs local DPI circumvention modules (**Zapret 2** + **ByeDPI**).
+5. Pre-configures smart split-tunnel routing rules.
 
-```sh
-wget -qO- https://raw.githubusercontent.com/1andrevich/homeproxy-hiddify/master/install.sh | GH_MIRROR=https://your.mirror sh
+---
+
+## ⚙️ Core Comparison
+
+The installer allows you to choose between two cores based on your router's available storage:
+
+| Feature | `hiddify-core` (Default) | `sing-box-extended` |
+| :--- | :--- | :--- |
+| **Disk footprint** | ~15–20 MB (Compact) | ~75–80 MB (Full) |
+| **Recommended storage** | Routers with 32–64 MB flash | Routers with 128+ MB / U-Boot mod |
+| **Supported protocols** | VLESS (Reality), VMess, Trojan, ShadowTLS, Hysteria 2, TUIC | VLESS, VMess, Trojan, ShadowTLS, Hysteria 2, TUIC + **AmneziaWG**, **WARP** |
+| **RAM usage** | Minimal | Standard |
+
+---
+
+## 🚀 Initial Configuration
+
+1. **Access Web Interface:**  
+   Open your browser at `http://192.168.1.1` ➔ navigate to **Services** ➔ **Veles Proxy**.
+
+2. **Add Node Subscriptions:**  
+   * Go to **Node Settings** ➔ **Subscriptions**.
+   * Paste your subscription link (VLESS / Sing-box / Base64 format).
+   * Click **Save & Apply**, then click **Update Subscriptions**.
+
+3. **Select Mode & Server:**  
+   * Under the **Client Settings** tab, set **Main Node** to a specific location or select the **`URLTest`** group (automatically routes through the server with the lowest latency).
+   * Switch the service toggle to **Enabled** and apply changes.
+
+---
+
+## 🛠️ Architecture & Traffic Flow
+
+```text
+[ Client Device: TV / Mobile / PC ]
+                 │
+                 ▼
+          [ Veles Proxy ]
+                 │
+       ┌─────────┴─────────┐
+       ▼                   ▼
+(Domestic Domain?)   (Blocked Domain?)
+       │                   │
+       ▼                   ▼
+ [ Direct ISP Out ]  [ Veles Tunnel ] ──► (VPS: DE / NL / US)
+  (Banks, Streaming)  (VLESS Reality)
 ```
 
-Prefer to do it by hand? Follow the per-version steps below.
+* **Re:filter Routing Engine:** Direct routing by rule-sets (domestic regional categories bypass the tunnel entirely, while restricted targets are proxied).
+* **Zapret 2 Integration:** Uses the system-level `nfqws` queue handler to modify packet signatures, bypassing ISP throttling and DPI inspection for YouTube and Discord without consuming VPS server resources.
 
-### OpenWRT 25.12+ (APK)
+---
 
-#### 1. Install *luci-app-re-homeproxy* package
+## 📋 Useful CLI Commands
 
-```sh
-wget -O /tmp/homeproxy-hiddify.pub https://github.com/1andrevich/homeproxy-hiddify/releases/latest/download/homeproxy-hiddify.pub
-cp /tmp/homeproxy-hiddify.pub /etc/apk/keys/
-wget -O /tmp/luci-app-re-homeproxy.apk "$(wget -qO- 'https://api.github.com/repos/1andrevich/homeproxy-hiddify/releases' | grep -o 'https://github\.com/[^"]*luci-app-re-homeproxy[^"]*\.apk' | head -1)"
-apk add /tmp/luci-app-re-homeproxy.apk
+Check service status:
+```bash
+/etc/init.d/homeproxy status
 ```
 
-Once the key is in `/etc/apk/keys/` it is trusted permanently — no flag needed for future updates.
-
-#### 2. Install components from the **Core & Tools** tab
-
-Open **Services → Veles Proxy → Core & Tools** and install what you need — the installer auto-picks a build that fits your storage:
-
-- **Proxy core** *(required, pick one)* — [hiddify-core](https://github.com/hiddify/hiddify-core) (default) or [sing-box-extended](https://github.com/shtorm-7/sing-box-extended) (adds AmneziaWG / WARP and the widest protocol set). See **[Core Management](../../wiki/Core-Management-en)**.
-- **ByeDPI** *(optional)* — SOCKS-level DPI bypass that un-throttles sites without a VPN, with 40 presets and a built-in strategy tester. See **[ByeDPI](../../wiki/ByeDPI-en)**.
-- **Zapret 2** *(optional)* — packet-level (nfqws2) DPI bypass selected per routing rule, with curated presets and optional Discord-voice desync. See **[Zapret](../../wiki/Zapret-en)**.
-
-### OpenWRT 24.10 (opkg)
-
-#### 1. Install *luci-app-re-homeproxy* package
-
-```sh
-wget -O /tmp/luci-app-re-homeproxy.ipk "$(wget -qO- 'https://api.github.com/repos/1andrevich/homeproxy-hiddify/releases' | grep -o 'https://github\.com/[^"]*luci-app-re-homeproxy[^"]*\.ipk' | head -1)"
-opkg install /tmp/luci-app-re-homeproxy.ipk
+Restart service:
+```bash
+/etc/init.d/homeproxy restart
 ```
 
-#### 2. Install components from the **Core & Tools** tab
-
-Open **Services → Veles Proxy → Core & Tools** and install what you need — the installer auto-picks a build that fits your storage:
-
-- **Proxy core** *(required, pick one)* — [hiddify-core](https://github.com/hiddify/hiddify-core) (default) or [sing-box-extended](https://github.com/shtorm-7/sing-box-extended) (adds AmneziaWG / WARP and the widest protocol set). See **[Core Management](../../wiki/Core-Management-en)**.
-- **ByeDPI** *(optional)* — SOCKS-level DPI bypass that un-throttles sites without a VPN, with 40 presets and a built-in strategy tester. See **[ByeDPI](../../wiki/ByeDPI-en)**.
-- **Zapret 2** *(optional)* — packet-level (nfqws2) DPI bypass selected per routing rule, with curated presets and optional Discord-voice desync. See **[Zapret](../../wiki/Zapret-en)**.
-
-### Manual install over SSH (alternative to the Core & Tools tab)
-
-The **Core & Tools** tab is recommended — it auto-detects your hardware and picks a build that fits. To install the same components by hand over SSH, first detect your architecture and package format:
-
-```sh
-. /etc/openwrt_release; ARCH="$DISTRIB_ARCH"
-command -v apk >/dev/null && EXT=apk || EXT=ipk
-echo "$ARCH / $EXT"
+Inspect flash storage (`/overlay` partition):
+```bash
+df -h /overlay
 ```
 
-The hiddify-core and ByeDPI packages are signed with the `homeproxy-hiddify.pub` key trusted during the app install above; if you skipped that, add `--allow-untrusted` to `apk add`.
-
-**Proxy core — pick one** (plus its required kernel modules):
-
-```sh
-if [ "$EXT" = apk ]; then apk add kmod-nft-tproxy kmod-tun; else opkg install kmod-nft-tproxy kmod-tun; fi
-
-# hiddify-core (default; for a compact build replace 'latest/download' with 'download/upx')
-wget -O /tmp/hiddify-core.$EXT "https://github.com/1andrevich/hiddify-core/releases/latest/download/hiddify-core_${ARCH}.${EXT}"
-if [ "$EXT" = apk ]; then apk add /tmp/hiddify-core.apk; else opkg install --force-reinstall /tmp/hiddify-core.ipk; fi
-
-# ...OR sing-box-extended (AmneziaWG / WARP, widest protocol set; unsigned)
-URL=$(wget -qO- 'https://api.github.com/repos/shtorm-7/sing-box-extended/releases/latest' | grep -o "https://github\.com/[^\"]*${ARCH}[^\"]*\.${EXT}" | head -1)
-wget -O /tmp/sing-box-extended.$EXT "$URL"
-if [ "$EXT" = apk ]; then apk add --allow-untrusted /tmp/sing-box-extended.apk; else opkg install /tmp/sing-box-extended.ipk; fi
+View live routing and runtime logs:
+```bash
+logread -e homeproxy
 ```
 
-**ByeDPI** *(optional)* — needs `curl` (its built-in strategy tester uses it):
-
-```sh
-if [ "$EXT" = apk ]; then apk add curl; else opkg install curl; fi
-URL=$(wget -qO- 'https://api.github.com/repos/1andrevich/ByeDPI-OpenWrt/releases/latest' | grep -o "https://github\.com/[^\"]*byedpi_[^\"]*${ARCH}\.${EXT}" | head -1)
-wget -O /tmp/byedpi.$EXT "$URL"
-if [ "$EXT" = apk ]; then apk add /tmp/byedpi.apk; else opkg install /tmp/byedpi.ipk; fi
+Clean temporary package cache:
+```bash
+apk cache clean 2>/dev/null || rm -rf /tmp/opkg-lists/*
 ```
 
-**Zapret 2** *(optional)* — needs the NFQUEUE kernel module:
+---
 
-```sh
-if [ "$EXT" = apk ]; then apk add kmod-nft-queue; else opkg install kmod-nft-queue; fi
-[ "$EXT" = apk ] && wget -O /etc/apk/keys/zapret2-1andrevich.pub "https://github.com/1andrevich/zapret2-openwrt/releases/latest/download/zapret2-1andrevich.pub"
-wget -O /tmp/zapret2.$EXT "https://github.com/1andrevich/zapret2-openwrt/releases/latest/download/zapret2_${ARCH}.${EXT}"
-if [ "$EXT" = apk ]; then apk add /tmp/zapret2.apk; else opkg install /tmp/zapret2.ipk; fi
-```
+## 📌 System Requirements
 
-### Optional 
-
-Installation of [Russian Language Pack](https://github.com/1andrevich/homeproxy-hiddify/blob/master/README_ru.md#3-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D1%8F%D0%B7%D1%8B%D0%BA%D0%BE%D0%B2%D0%BE%D0%B3%D0%BE-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%B0-ru-1)
-
-If using "Custom JSON" — see the **[Custom JSON Config](../../wiki/Custom-JSON-Config-en)** wiki page for full details.
-
-### 4. Start the service
-
-```sh
-/etc/init.d/homeproxy start
-```
-
-The service will auto-start on boot. Monitor logs at **Services → Veles Proxy → Core & Tools**.
-
-## Documentation
-
-Full guides live in the **[Wiki](../../wiki/Home)**:
-
-- **[Getting Started](../../wiki/Getting-Started-en)** — from a fresh install to a working connection, step by step
-- **[Core Management](../../wiki/Core-Management-en)** — hiddify-core vs sing-box-extended, the smart installer, storage and the compact build
-- **[Supported Protocols](../../wiki/Supported-Protocols-en)** — every protocol, transport, and the build tags each needs
-- **[Subscriptions & Node Import](../../wiki/Subscriptions-en)** — share links, .conf, Amnezia `vpn://` (AmneziaWG/Xray), subscriptions, base64
-- **[Routing & Access Control](../../wiki/Routing-and-Access-Control-en)** — routing modes, RU Proxy Rules, per-device access control
-- **[Server Settings](../../wiki/Server-Settings-en)** — run the router as a proxy server (inbounds, types, TLS/ACME)
-- **[DNS & Diagnostics](../../wiki/DNS-and-Diagnostics-en)** — clean vs secure DNS, IPv6 leaks, and the Diagnostics page
-- **[ByeDPI](../../wiki/ByeDPI-en)** — SOCKS-level DPI bypass, strategy presets and the tester
-- **[Zapret](../../wiki/Zapret-en)** — packet-level (nfqws2) DPI bypass, presets, Discord-voice and the tester
-- **[Custom Routing](../../wiki/Custom-Routing-en)** — UI routing nodes + rules (match by domain/IP/port/protocol/process)
-- **[Custom JSON Config](../../wiki/Custom-JSON-Config-en)** — raw hiddify-core config routing mode
-- **[Troubleshooting](../../wiki/Troubleshooting-en)** — common errors and fixes
-
-## Credits & Acknowledgements
-
-Veles Proxy stands on the work of many upstream projects. The LuCI app is GPL-licensed; the cores and bypass engines are fetched at install time from their own releases and remain under their own licenses.
-
-**Base & cores**
-- [ImmortalWrt HomeProxy](https://github.com/immortalwrt/homeproxy) — the original LuCI app this is a fork of
-- [hiddify-core](https://github.com/hiddify/hiddify-core) — default proxy core (a sing-box fork by the Hiddify team)
-- [sing-box-extended](https://github.com/shtorm-7/sing-box-extended) — alternative core with extra build tags (AmneziaWG/WARP, widest protocol set)
-- [sing-box](https://sing-box.sagernet.org) — the upstream engine both cores derive from
-
-**DPI-bypass engines**
-- [hufrea/byedpi](https://github.com/hufrea/byedpi) — the ByeDPI (`ciadpi`) desync engine; OpenWrt packages by [1andrevich/ByeDPI-OpenWrt](https://github.com/1andrevich/ByeDPI-OpenWrt)
-- [bol-van/zapret2](https://github.com/bol-van/zapret2) — the Zapret / nfqws2 / blockcheck2 packet desync engine; OpenWrt packages by [1andrevich/zapret2-openwrt](https://github.com/1andrevich/zapret2-openwrt); some strategy presets adapted from [flowseal/zapret-discord-youtube](https://github.com/flowseal/zapret-discord-youtube) (MIT)
-
-**Protocols** — implemented by the cores above (see [Supported Protocols](../../wiki/Supported-Protocols-en)):
-
-Naive, Mieru, Hysteria/Hysteria2, TUIC, SOCKS, Shadowsocks/Shadowsocks 2022, ShadowTLS, AnyTLS, Trojan, VLESS (Reality, XHTTP), VMess, WireGuard, AmneziaWG/WARP, SSH.
-
-**Routing lists**
-- [Re:Filter](https://github.com/1andrevich/re-filter) — RKN-registry domain + IP blocklist
-- [itdoginfo/allow-domains](https://github.com/itdoginfo/allow-domains) — "Russia Inside" and the per-service routing lists (YouTube, Telegram, Discord, Meta, etc.)
-- [itdoginfo](https://github.com/itdoginfo) — HODCA and other curated lists by itdoginfo
-
-All trademarks and service names are the property of their respective owners and are referenced nominatively to identify the traffic each rule or list affects.
+* **Supported Hardware:** MediaTek Filogic (MT7981, MT7986, MT7988), Qualcomm, Rockchip, x86_64 architectures.
+* **Firmware:** OpenWrt 23.05, 24.10, 25.12-SNAPSHOT, or modern ImmortalWrt builds.
+* **Storage (`/overlay` partition):**
+  * **25+ MB** free space for `hiddify-core`.
+  * **90+ MB** free space for `sing-box-extended`.

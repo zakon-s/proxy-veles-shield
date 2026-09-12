@@ -219,7 +219,7 @@ fi
 # 6.2. Вшиваем кликабельные ссылки в веб-интерфейс LuCI
 TARGET_VIEW=$(find /www/luci-static/resources/view/ -type f \( -name "*homeproxy*.js" -o -name "*veles*.js" -o -name "client.js" \) 2>/dev/null | head -1)
 if [ -n "$TARGET_VIEW" ] && ! grep -q "veless_vpn_bot" "$TARGET_VIEW"; then
-	sed -i 's|new form.Map(\([^,]*\), \([^,]*\))|new form.Map(\1, \2, "Поддержка и продление: <a href=\\\"https://t.me/veless_vpn_bot\\\" target=\\\"_blank\\\" style=\\\"font-weight:bold; color:#0088cc;\\\">Telegram-бот</a> | <a href=\\\"http://veles-systems.ru\\\" target=\\\"_blank\\\" style=\\\"font-weight:bold; color:#2b73b7;\\\">veles-systems.ru</a>")|g' "$TARGET_VIEW"
+	sed -i 's~new form.Map(\([^,]*\), \([^,)]*\))~new form.Map(\1, \2, "Поддержка и продление: <a href=\\\"https://t.me/veless_vpn_bot\\\" target=\\\"_blank\\\" style=\\\"font-weight:bold; color:#0088cc;\\\">Telegram-бот</a> • <a href=\\\"http://veles-systems.ru\\\" target=\\\"_blank\\\" style=\\\"font-weight:bold; color:#2b73b7;\\\">veles-systems.ru</a>")~g' "$TARGET_VIEW"
 fi
 
 # 6.3. Сброс кэша веб-интерфейса
